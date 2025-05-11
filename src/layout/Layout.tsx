@@ -1,14 +1,14 @@
-import Sidebar from "../component/sidebar/Sidebar";
+import { Bottombar } from "../components/bottombar";
 
 interface LayoutProps {
     children: React.ReactNode
-    sidebar?: boolean
+    bottombar?: boolean
 }
 
-export default function Layout({ children, sidebar = true }: LayoutProps) {
+export default function Layout({ children, bottombar = true }: LayoutProps) {
   return (
     <div>
-      {sidebar && <Sidebar />}
+      {bottombar && <Bottombar />}
       <div style={{
         display: 'flex',
         flexDirection: 'column',

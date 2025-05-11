@@ -1,7 +1,7 @@
 import { useTheme } from '../../context/ThemeContext'
 import { Link } from 'react-router-dom'
 
-export default function Sidebar() {
+export const Bottombar = () => {
   const { theme, toggleTheme } = useTheme()
 
   const iconStyle = {

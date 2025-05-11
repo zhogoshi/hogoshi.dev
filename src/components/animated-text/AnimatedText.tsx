@@ -1,4 +1,4 @@
-const AnimatedText = () => {
+export const AnimatedText = () => {
   return (
     <h1 style={{ fontSize: '100px', fontWeight: 'bold', paddingBottom: '20px' }}>
       <span style={{
@@ -25,5 +25,3 @@ const AnimatedText = () => {
     </h1>
   );
 };
-
-export default AnimatedText; 
