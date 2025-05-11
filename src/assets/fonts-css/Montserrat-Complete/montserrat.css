@@ -1,0 +1,229 @@
+/**
+* @license
+*
+* Font Family: Montserrat
+* Designed by: Julieta Ulanovsky, Sol Matas, Juan Pablo del Peral, Jacques Le Bailly
+* URL: https://www.fontshare.com/fonts/montserrat
+* © 2025 Indian Type Foundry
+*
+* Montserrat Thin 
+* Montserrat ThinItalic 
+* Montserrat ExtraLight 
+* Montserrat ExtraLightItalic 
+* Montserrat Light 
+* Montserrat LightItalic 
+* Montserrat Regular 
+* Montserrat Italic 
+* Montserrat Medium 
+* Montserrat MediumItalic 
+* Montserrat SemiBold 
+* Montserrat SemiBoldItalic 
+* Montserrat Bold 
+* Montserrat BoldItalic 
+* Montserrat ExtraBold 
+* Montserrat ExtraBoldItalic 
+* Montserrat Black 
+* Montserrat BlackItalic 
+* Montserrat Variable (Variable font)
+* Montserrat VariableItalic (Variable font)
+
+*
+*/
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../../fonts/Montserrat-Complete/Montserrat-Thin.woff2') format('woff2'),
+         url('../../fonts/Montserrat-Complete/Montserrat-Thin.woff') format('woff'),
+         url('../../fonts/Montserrat-Complete/Montserrat-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('../../fonts/Montserrat-Complete/Montserrat-ThinItalic.woff2') format('woff2'),
+         url('../../fonts/Montserrat-Complete/Montserrat-ThinItalic.woff') format('woff'),
+         url('../../fonts/Montserrat-Complete/Montserrat-ThinItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-display: swap;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('../../fonts/Montserrat-Complete/Montserrat-ExtraLight.woff2') format('woff2'),
+         url('../../fonts/Montserrat-Complete/Montserrat-ExtraLight.woff') format('woff'),
+         url('../../fonts/Montserrat-Complete/Montserrat-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('../../fonts/Montserrat-Complete/Montserrat-ExtraLightItalic.woff2') format('woff2'),
+         url('../../fonts/Montserrat-Complete/Montserrat-ExtraLightItalic.woff') format('woff'),
+         url('../../fonts/Montserrat-Complete/Montserrat-ExtraLightItalic.ttf') format('truetype');
+    font-weight: 200;
+    font-display: swap;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('../../fonts/Montserrat-Complete/Montserrat-Light.woff2') format('woff2'),
+         url('../../fonts/Montserrat-Complete/Montserrat-Light.woff') format('woff'),
+         url('../../fonts/Montserrat-Complete/Montserrat-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('../../fonts/Montserrat-Complete/Montserrat-LightItalic.woff2') format('woff2'),
+         url('../../fonts/Montserrat-Complete/Montserrat-LightItalic.woff') format('woff'),
+         url('../../fonts/Montserrat-Complete/Montserrat-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-display: swap;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('../../fonts/Montserrat-Complete/Montserrat-Regular.woff2') format('woff2'),
+         url('../../fonts/Montserrat-Complete/Montserrat-Regular.woff') format('woff'),
+         url('../../fonts/Montserrat-Complete/Montserrat-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('../../fonts/Montserrat-Complete/Montserrat-Italic.woff2') format('woff2'),
+         url('../../fonts/Montserrat-Complete/Montserrat-Italic.woff') format('woff'),
+         url('../../fonts/Montserrat-Complete/Montserrat-Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-display: swap;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('../../fonts/Montserrat-Complete/Montserrat-Medium.woff2') format('woff2'),
+         url('../../fonts/Montserrat-Complete/Montserrat-Medium.woff') format('woff'),
+         url('../../fonts/Montserrat-Complete/Montserrat-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('../../fonts/Montserrat-Complete/Montserrat-MediumItalic.woff2') format('woff2'),
+         url('../../fonts/Montserrat-Complete/Montserrat-MediumItalic.woff') format('woff'),
+         url('../../fonts/Montserrat-Complete/Montserrat-MediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-display: swap;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('../../fonts/Montserrat-Complete/Montserrat-SemiBold.woff2') format('woff2'),
+         url('../../fonts/Montserrat-Complete/Montserrat-SemiBold.woff') format('woff'),
+         url('../../fonts/Montserrat-Complete/Montserrat-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('../../fonts/Montserrat-Complete/Montserrat-SemiBoldItalic.woff2') format('woff2'),
+         url('../../fonts/Montserrat-Complete/Montserrat-SemiBoldItalic.woff') format('woff'),
+         url('../../fonts/Montserrat-Complete/Montserrat-SemiBoldItalic.ttf') format('truetype');
+    font-weight: 600;
+    font-display: swap;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('../../fonts/Montserrat-Complete/Montserrat-Bold.woff2') format('woff2'),
+         url('../../fonts/Montserrat-Complete/Montserrat-Bold.woff') format('woff'),
+         url('../../fonts/Montserrat-Complete/Montserrat-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('../../fonts/Montserrat-Complete/Montserrat-BoldItalic.woff2') format('woff2'),
+         url('../../fonts/Montserrat-Complete/Montserrat-BoldItalic.woff') format('woff'),
+         url('../../fonts/Montserrat-Complete/Montserrat-BoldItalic.ttf') format('truetype');
+    font-weight: 700;
+    font-display: swap;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('../../fonts/Montserrat-Complete/Montserrat-ExtraBold.woff2') format('woff2'),
+         url('../../fonts/Montserrat-Complete/Montserrat-ExtraBold.woff') format('woff'),
+         url('../../fonts/Montserrat-Complete/Montserrat-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('../../fonts/Montserrat-Complete/Montserrat-ExtraBoldItalic.woff2') format('woff2'),
+         url('../../fonts/Montserrat-Complete/Montserrat-ExtraBoldItalic.woff') format('woff'),
+         url('../../fonts/Montserrat-Complete/Montserrat-ExtraBoldItalic.ttf') format('truetype');
+    font-weight: 800;
+    font-display: swap;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('../../fonts/Montserrat-Complete/Montserrat-Black.woff2') format('woff2'),
+         url('../../fonts/Montserrat-Complete/Montserrat-Black.woff') format('woff'),
+         url('../../fonts/Montserrat-Complete/Montserrat-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('../../fonts/Montserrat-Complete/Montserrat-BlackItalic.woff2') format('woff2'),
+         url('../../fonts/Montserrat-Complete/Montserrat-BlackItalic.woff') format('woff'),
+         url('../../fonts/Montserrat-Complete/Montserrat-BlackItalic.ttf') format('truetype');
+    font-weight: 900;
+    font-display: swap;
+    font-style: italic;
+  }
+  /**
+  * This is a variable font
+  * You can control variable axes as shown below:
+  * font-variation-settings: wght 100.0;
+  *
+  * available axes:
+  'wght' (range from 100.0 to 900.0
+  */
+  @font-face {
+    font-family: 'Montserrat-Variable';
+    src: url('../../fonts/Montserrat-Complete/Montserrat-Variable.woff2') format('woff2'),
+         url('../../fonts/Montserrat-Complete/Montserrat-Variable.woff') format('woff'),
+         url('../../fonts/Montserrat-Complete/Montserrat-Variable.ttf') format('truetype');
+    font-weight: 100 900;
+    font-display: swap;
+    font-style: normal;
+  }
+  /**
+  * This is a variable font
+  * You can control variable axes as shown below:
+  * font-variation-settings: wght 100.0;
+  *
+  * available axes:
+  'wght' (range from 100.0 to 900.0
+  */
+  @font-face {
+    font-family: 'Montserrat-VariableItalic';
+    src: url('../../fonts/Montserrat-Complete/Montserrat-VariableItalic.woff2') format('woff2'),
+         url('../../fonts/Montserrat-Complete/Montserrat-VariableItalic.woff') format('woff'),
+         url('../../fonts/Montserrat-Complete/Montserrat-VariableItalic.ttf') format('truetype');
+    font-weight: 100 900;
+    font-display: swap;
+    font-style: italic;
+  }
+  
+  
