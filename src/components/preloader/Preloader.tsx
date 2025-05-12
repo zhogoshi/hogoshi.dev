@@ -38,7 +38,9 @@ export const Preloader: FC<PreloaderFC> = ({ fullScreen = true }) => {
                             height: '12px',
                             borderRadius: '50%',
                             background: theme === 'dark' ? '#ffffff' : '#1a1a1a',
-                            animation: `pulse 1.4s ease-in-out ${index * 0.2}s infinite`
+                            animation: `pulse 1.4s ease-in-out ${index * 0.2}s infinite`,
+                            transform: 'scale(0.3)',
+                            opacity: 0.3
                         }}
                     />
                 ))}
