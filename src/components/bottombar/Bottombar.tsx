@@ -36,14 +36,14 @@ export const Bottombar = () => {
       padding: '0 20px'
     }}>
 
-      <Link to="about" style={iconStyle}>
+      <Link to="/about" style={iconStyle}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
           <circle cx="12" cy="7" r="4" />
         </svg>
       </Link>
       
-      <Link to="projects" style={iconStyle}>
+      <Link to="/projects" style={iconStyle}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M3 3h18v18H3z" />
           <path d="M3 9h18" />
@@ -51,14 +51,14 @@ export const Bottombar = () => {
         </svg>
       </Link>
 
-      <Link to="" style={iconStyle}>
+      <Link to="/" style={iconStyle}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
           <polyline points="9 22 9 12 15 12 15 22" />
         </svg>
       </Link>
 
-      <Link to="blog" style={iconStyle}>
+      <Link to="/blog" style={iconStyle}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
           <polyline points="14 2 14 8 20 8" />
