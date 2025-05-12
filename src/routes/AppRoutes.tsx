@@ -3,6 +3,9 @@ import { lazy } from 'react';
 import Layout from '../layout/Layout';
 import { AnimatedText } from '../components/animated-text';
 import { SuspenseLayout } from '../components/suspense';
+import { useTheme } from '../context/ThemeContext';
+import About from './about/About';
+import Projects from './projects/Projects';
 
 const Home = lazy(() => import('./home/Home'));
 
@@ -15,15 +18,25 @@ const AppRoutes = () => {
               <Home />
           </Layout>
         } />
+        <Route path="/about" element={
+          <Layout>
+              <About />
+          </Layout>
+        } />
+        <Route path="/projects" element={
+          <Layout>
+              <Projects />
+          </Layout>
+        } />
         <Route path="*" element={
           <Layout>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column' }}>
               <AnimatedText />
               <h2 style={{
                 fontSize: '5vw',
-                fontWeight: 500,
-                color: '#666666'
-              }}>Page not found</h2>
+                fontWeight: 100,
+                color: useTheme().theme === 'light' ? '#afafaf' : '#aaaaaa'
+              }}>page not found :c</h2>
             </div>
           </Layout>
         } />
