@@ -22,7 +22,7 @@ const Tooltip = ({ text, show }: { text: string, show: boolean }) => {
         whiteSpace: 'nowrap',
         pointerEvents: 'none',
         transition: 'all 0.2s',
-        zIndex: 100000,
+        zIndex: 1000,
         boxShadow: '0 0 16px ' + (theme === 'light' ? 'rgba(0,0,0,0.25)' : 'rgba(255,255,255,0.25)'),
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
@@ -62,7 +62,7 @@ export const Bottombar = () => {
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
-    zIndex: 99999,
+    zIndex: 1000,
     padding: '0 20px',
     backdropFilter: 'blur(12px)',
     WebkitBackdropFilter: 'blur(12px)'
