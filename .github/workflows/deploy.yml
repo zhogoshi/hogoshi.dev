@@ -1,10 +1,19 @@
 name: Deploy React + Vite to Github Pages
 
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: ['main']
+  workflow_dispatch:
+
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
 
 jobs:
   build-deploy:
@@ -24,6 +33,17 @@ jobs:
 
       - name: Build project
         run: npm run build
+    
+      - name: Copy index.html to 404.html
+        run: cp ./dist/index.html ./dist/404.html
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: './dist'
 
       - name: Deploy to github pages
         uses: peaceiris/actions-gh-pages@v3
