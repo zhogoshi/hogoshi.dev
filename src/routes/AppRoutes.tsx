@@ -15,17 +15,17 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={
           <Layout>
-              <Home />
+            <Home />
           </Layout>
         } />
         <Route path="/about" element={
           <Layout>
-              <About />
+            <About />
           </Layout>
         } />
         <Route path="/projects" element={
           <Layout>
-              <Projects />
+            <Projects />
           </Layout>
         } />
         <Route path="*" element={
