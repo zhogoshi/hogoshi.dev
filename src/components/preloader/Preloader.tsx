@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { useTheme } from "../../layout/ThemeContext"
+import { useTheme } from "../layout/ThemeContext"
 
 interface PreloaderFC {
     fullScreen: boolean

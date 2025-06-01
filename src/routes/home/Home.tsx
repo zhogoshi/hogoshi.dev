@@ -1,5 +1,5 @@
-import { useTheme } from "../../layout/ThemeContext";
-import useIsMobile from "../../layout/useIsMobile";
+import { useTheme } from "../../components/layout/ThemeContext";
+import useIsMobile from "../../components/layout/useIsMobile";
 
 export default function Home() {
   const isMobile = useIsMobile();

@@ -1,5 +1,5 @@
-import { Bottombar } from "../components/bottombar";
-import { PageTransition } from "../components/page-transition/PageTransition";
+import { Bottombar } from "../bottombar/Bottombar";
+import { PageTransition } from "../page-transition/PageTransition";
 import styled from '@emotion/styled';
 
 const ContentWrapper = styled.div`
