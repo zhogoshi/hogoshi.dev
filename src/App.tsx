@@ -1,7 +1,7 @@
 import { BrowserRouter } from 'react-router-dom';
 import './App.css'
 import AppRoutes from './routes/AppRoutes';
-import { ThemeProvider } from './context/ThemeContext'
+import { ThemeProvider } from './layout/ThemeContext'
 import { SuspenseLayout } from './components/suspense/Suspense';
 
 function App() {

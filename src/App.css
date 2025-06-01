@@ -21,12 +21,16 @@
 
 :root[data-theme="light"] {
   --bg-color: #ffffff;
+  --bg-color-secondary: #fafafa;
+  --border-color: #e0e0e0;
   --text-color: #333333;
   --link-color: #000000;
 }
 
 :root[data-theme="dark"] {
   --bg-color: #1a1a1a;
+  --bg-color-secondary: #2a2a2a;
+  --border-color: #333333;
   --text-color: #fafafa;
   --link-color: #ffffff;
 }

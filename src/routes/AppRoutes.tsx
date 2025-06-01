@@ -3,7 +3,7 @@ import { lazy } from 'react';
 import Layout from '../layout/Layout';
 import { AnimatedText } from '../components/animated-text';
 import { SuspenseLayout } from '../components/suspense';
-import { useTheme } from '../context/ThemeContext';
+import { useTheme } from '../layout/ThemeContext';
 import About from './about/About';
 import Projects from './projects/Projects';
 

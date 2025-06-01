@@ -1,4 +1,4 @@
-import useIsMobile from '../../hooks/useIsMobile'
+import useIsMobile from '../../layout/useIsMobile'
 
 export default function About() {
     const isMobile = useIsMobile();
