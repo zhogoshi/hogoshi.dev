@@ -38,7 +38,7 @@ export default function Projects() {
                 const data = await response.json();
 
                 const filteredProjects = data
-                    .sort((a: Repository, b: Repository) => b.stargazers_count + a.stargazers_count);
+                    .sort((a: Repository, b: Repository) => b.stargazers_count - a.stargazers_count);
                 setTimeout(() => {
                     setProjects(filteredProjects);
                     setIsLoading(false);
@@ -299,11 +299,6 @@ function ProjectItem({ project, index }: { project: Repository, index: number })
                 {project.description && (
                     <p>{project.description}</p>
                 )}
-                <p style={{
-                    color: 'var(--text-color)',
-                    fontSize: '12px',
-                    fontWeight: 'bold'
-                }}>{project.html_url}</p>
                 <p style={{
                     color: 'var(--text-color)',
                     fontSize: '12px',
