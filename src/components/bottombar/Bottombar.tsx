@@ -12,7 +12,8 @@ const Tooltip = ({ text, show }: { text: string, show: boolean }) => {
         position: 'absolute',
         bottom: '60px',
         left: '50%',
-        transform: 'translateX(-50%)',
+        transform: `translateX(-50%) scale(${show ? 1 : 0})`,
+        transformOrigin: 'bottom center',
         background: theme === 'light' ? 'rgba(255,255,255,0.7)' : 'rgba(26,26,26,0.7)',
         color: theme === 'light' ? '#333' : '#fff',
         fontWeight: 300,
@@ -21,11 +22,9 @@ const Tooltip = ({ text, show }: { text: string, show: boolean }) => {
         fontSize: '14px',
         whiteSpace: 'nowrap',
         pointerEvents: 'none',
-        transition: 'all 0.2s',
+        transition: 'all 0.3s',
         zIndex: 1000,
         boxShadow: '0 0 16px ' + (theme === 'light' ? 'rgba(0,0,0,0.25)' : 'rgba(255,255,255,0.25)'),
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
         opacity: show ? 1 : 0
       }}
     >
