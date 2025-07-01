@@ -6,6 +6,7 @@ import { SuspenseLayout } from '../components/suspense';
 import { useTheme } from '../components/layout/ThemeContext';
 import About from './about/About';
 import Projects from './projects/Projects';
+import Cv from './cv/Cv';
 
 const Home = lazy(() => import('./home/Home'));
 
@@ -26,6 +27,11 @@ const AppRoutes = () => {
         <Route path="/projects" element={
           <Layout>
             <Projects />
+          </Layout>
+        } />
+        <Route path="/cv" element={
+          <Layout>
+            <Cv />
           </Layout>
         } />
         <Route path="*" element={
