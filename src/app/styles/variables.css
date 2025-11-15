@@ -1,0 +1,40 @@
+:root {
+    --text-light: 24, 22, 22;
+    --background-light: 241, 233, 233;
+    --primary-light: 182, 95, 93;
+    --secondary-light: 222, 156, 156;
+    --accent-light: 215, 91, 91;
+
+    --text-dark: 233, 231, 231;
+    --background-dark: 22, 14, 14;
+    --primary-dark: 162, 74, 73;
+    --secondary-dark: 99, 33, 33;
+    --accent-dark: 164, 40, 40;
+
+    --black: 0, 0, 0;
+    --white: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text: rgb(var(--text-dark));
+        --background: rgb(var(--background-dark));
+        --primary: rgb(var(--primary-dark));
+        --secondary: rgb(var(--secondary-dark));
+        --accent: rgb(var(--accent-dark));
+
+        --navbar-background: rgba(var(--secondary-dark), 0.2);
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --text: rgb(var(--text-light));
+        --background: rgb(var(--background-light));
+        --primary: rgb(var(--primary-light));
+        --secondary: rgb(var(--secondary-light));
+        --accent: rgb(var(--accent-light));
+
+        --navbar-background: rgba(var(--secondary-light), 0.2);
+    }
+}

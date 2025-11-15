@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="/icon.png" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hogoshi</title>
+  <link rel="modulepreload" href="/src/main.tsx">
+  <link rel="preload" href="/src/app/styles/global.css" as="style">
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+  <noscript>
+    <style>
+      body > :not(noscript) { display: none !important; }
+      html, body { height: 100%; }
+
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      .no-js {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        padding: 24px;
+        text-align: center;
+        font-family: system-ui, -apple-system, sans-serif;
+        background: var(--background, #ffffff);
+        color: var(--text, #000000);
+      }
+
+      .no-js h1 {
+        font-size: 3.053rem;
+      }
+
+      .no-js p {
+        font-size: 1.250rem;
+        font-weight: normal;
+      }
+
+      :root {
+        --text-light: #181616;
+        --background-light: #f1e9e9;
+        --primary-light: #b65f5d;
+        --secondary-light: #de9c9c;
+        --accent-light: #d75b5b;
+
+        --text-dark: #e9e7e7;
+        --background-dark: #160e0e;
+        --primary-dark: #a24a49;
+        --secondary-dark: #632121;
+        --accent-dark: #a42828;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --text: var(--text-dark);
+          --background: var(--background-dark);
+          --primary: var(--primary-dark);
+          --secondary: var(--secondary-dark);
+          --accent: var(--accent-dark);
+        }
+      }
+
+      @media (prefers-color-scheme: light) {
+        :root {
+          --text: var(--text-light);
+          --background: var(--background-light);
+          --primary: var(--primary-light);
+          --secondary: var(--secondary-light);
+          --accent: var(--accent-light);
+        }
+      }
+    </style>
+    <div class="no-js">
+      <h1>
+        Sorry :c
+      </h1>
+      <p>
+        Please, turn on JavaScript for correct working of website
+      </p>
+    </div>
+  </noscript>
+</body>
+
+</html>
