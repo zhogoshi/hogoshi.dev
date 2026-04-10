@@ -60,11 +60,12 @@ export const Preloader = () => {
             {isLoading && (
                 <Overlay
                     key="preloader-overlay"
-                    initial={{ opacity: 1 }}
-                    exit={{ opacity: 0, scale: 1.5 }}
+                    initial={{ opacity: 1, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, scale: 1.08, filter: 'blur(12px)' }}
                     transition={{
-                        scale: { duration: 0.4, ease: 'easeInOut' },
-                        opacity: { duration: 0.4, delay: 0.2, ease: 'easeInOut' }
+                        scale: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+                        opacity: { duration: 0.5, delay: 0.08, ease: 'easeInOut' },
+                        filter: { duration: 0.45, ease: 'easeInOut' },
                     }}>
                     <LoaderContainer>
                         {[0, 1, 2, 3].map((index) => (

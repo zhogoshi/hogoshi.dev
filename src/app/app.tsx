@@ -1,3 +1,4 @@
+import 'lenis/dist/lenis.css';
 import './styles/global.css';
 import { AppRoutes } from '@routes/routing';
 

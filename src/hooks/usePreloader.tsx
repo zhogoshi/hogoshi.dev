@@ -1,32 +1,44 @@
-import { useEffect, useState } from 'react';
-import type { ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import { PreloaderContext } from './usePreloaderContext';
 
 interface PreloaderProviderProps {
     children: ReactNode;
 }
 
+const MIN_VISIBLE_MS = 650;
+
 export const PreloaderProvider = ({ children }: PreloaderProviderProps) => {
     const [isLoading, setIsLoading] = useState(true);
     const [assetsCount, setAssetsCount] = useState(0);
     const [loadedAssetsCount, setLoadedAssetsCount] = useState(0);
-    
+
+    const mountTimeRef = useRef(Date.now());
+    const finishOnceRef = useRef(false);
+
     const DEBUG = false;
 
     const addAsset = () => {
-        setAssetsCount(prev => prev + 1);
+        setAssetsCount((prev) => prev + 1);
     };
 
     const assetLoaded = () => {
-        setLoadedAssetsCount(prev => prev + 1);
+        setLoadedAssetsCount((prev) => prev + 1);
     };
 
     const setLoading = (loading: boolean) => {
         setIsLoading(loading);
     };
 
+    const scheduleFinish = useCallback((baseMs: number) => {
+        if (finishOnceRef.current) return;
+        finishOnceRef.current = true;
+        const elapsed = Date.now() - mountTimeRef.current;
+        const delay = Math.max(baseMs, MIN_VISIBLE_MS - elapsed);
+        window.setTimeout(() => setIsLoading(false), delay);
+    }, []);
+
     useEffect(() => {
-        const checkInitialAssets = async () => {
+        const checkInitialAssets = () => {
             const images = Array.from(document.images);
             const videos = Array.from(document.querySelectorAll('video'));
             const allAssets = [...images, ...videos];
@@ -38,8 +50,8 @@ export const PreloaderProvider = ({ children }: PreloaderProviderProps) => {
                     videos: videos.length,
                     fonts: hasFontLoadingAPI ? 'checking...' : 'not available',
                     total: allAssets.length + (hasFontLoadingAPI ? 1 : 0),
-                    imageUrls: images.map(img => img.src),
-                    videoUrls: videos.map(video => video.src)
+                    imageUrls: images.map((img) => img.src),
+                    videoUrls: videos.map((video) => video.src),
                 });
             }
 
@@ -47,7 +59,7 @@ export const PreloaderProvider = ({ children }: PreloaderProviderProps) => {
 
             if (totalAssets === 0) {
                 if (DEBUG) console.log('no assets');
-                setTimeout(() => setIsLoading(false), 500);
+                scheduleFinish(480);
                 return;
             }
 
@@ -62,7 +74,7 @@ export const PreloaderProvider = ({ children }: PreloaderProviderProps) => {
                 }
                 if (loaded >= totalAssets) {
                     if (DEBUG) console.log('all is loaded');
-                    setTimeout(() => setIsLoading(false), 300);
+                    scheduleFinish(320);
                 }
             };
 
@@ -120,8 +132,11 @@ export const PreloaderProvider = ({ children }: PreloaderProviderProps) => {
             }
         }, 100);
 
-        const fallbackTimer = setTimeout(() => {
-            setIsLoading(false);
+        const fallbackTimer = window.setTimeout(() => {
+            if (!finishOnceRef.current) {
+                finishOnceRef.current = true;
+                setIsLoading(false);
+            }
         }, 10000);
 
         return () => {
@@ -129,15 +144,8 @@ export const PreloaderProvider = ({ children }: PreloaderProviderProps) => {
             clearTimeout(fallbackTimer);
             window.removeEventListener('load', checkInitialAssets);
         };
-    }, [DEBUG]);
+    }, [DEBUG, scheduleFinish]);
 
-    useEffect(() => {
-        if (assetsCount > 0 && loadedAssetsCount >= assetsCount) {
-            setTimeout(() => setIsLoading(false), 300);
-        }
-    }, [assetsCount, loadedAssetsCount]);
-
-    // Expose debug info to window for testing
     useEffect(() => {
         if (DEBUG) {
             (window as { preloaderDebug?: Record<string, unknown> }).preloaderDebug = {
@@ -147,22 +155,24 @@ export const PreloaderProvider = ({ children }: PreloaderProviderProps) => {
                 progress: assetsCount > 0 ? Math.round((loadedAssetsCount / assetsCount) * 100) : 0,
                 forceFinish: () => setIsLoading(false),
                 getAssetsList: () => {
-                    const images = Array.from(document.images);
-                    const videos = Array.from(document.querySelectorAll('video'));
-                    return { images, videos };
-                }
+                    const imgs = Array.from(document.images);
+                    const vids = Array.from(document.querySelectorAll('video'));
+                    return { images: imgs, videos: vids };
+                },
             };
         }
     }, [isLoading, assetsCount, loadedAssetsCount, DEBUG]);
 
     return (
-        <PreloaderContext.Provider value={{ 
-            isLoading, 
-            setLoading, 
-            addAsset, 
-            assetLoaded, 
-            loadingProgress: { loaded: loadedAssetsCount, total: assetsCount }
-        }}>
+        <PreloaderContext.Provider
+            value={{
+                isLoading,
+                setLoading,
+                addAsset,
+                assetLoaded,
+                loadingProgress: { loaded: loadedAssetsCount, total: assetsCount },
+            }}
+        >
             {children}
         </PreloaderContext.Provider>
     );

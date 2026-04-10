@@ -1,42 +1,33 @@
+import { useLenisScroll } from "@context/lenisScrollContext"
 import styled from "@emotion/styled"
 import { device, size } from "@utility"
 import { motion, AnimatePresence } from "framer-motion"
-import { useNavigate } from "react-router-dom"
-import { useState, useEffect } from "react"
+import { useNavigate, useLocation } from "react-router-dom"
+import { useState, useEffect, useRef } from "react"
 
+type NavItem = {
+    title: string
+    link: string
+    hash?: string
+}
 
-const links = [
-    {
-        "title": "home",
-        "link": "/"
-    },
-/*    {
-        "title": "about",
-        "link": "/about"
-    },
-    {
-        "title": "connect",
-        "link": "/connect"
-    },
-    {
-        "title": "projects",
-        "link": "/projects"
-    },
-    {
-        "title": "cv",
-        "link": "/cv"
-    }*/
+const links: NavItem[] = [
+    { title: "home", link: "/", hash: "intro" },
+    { title: "about", link: "/", hash: "about" },
+    { title: "connect", link: "/", hash: "connect" },
 ]
-
 
 const NavbarWrapper = styled.div`
     width: 100%;
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
     padding: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
+    pointer-events: none;
 `
 
 
@@ -54,6 +45,7 @@ const NavbarContainer = styled.div`
     align-items: center;
     overflow: hidden;
     position: relative;
+    pointer-events: auto;
     
     @media ${device.sm} {
         width: 460px;
@@ -161,6 +153,8 @@ const MobileMenuOverlay = styled(motion.div)`
     bottom: 0;
     background: rgba(255, 255, 255, 0.3);
     z-index: 999;
+    touch-action: none;
+    overscroll-behavior: none;
 
     @media (prefers-color-scheme: dark) {
         background: rgba(0, 0, 0, 0.3);
@@ -183,6 +177,8 @@ const MobileMenuContainer = styled(motion.div)`
     display: flex;
     flex-direction: column;
     gap: 16px;
+    touch-action: manipulation;
+    overscroll-behavior: none;
 `
 
 
@@ -203,22 +199,105 @@ const MobileLink = styled(motion.p)`
 
 export const Navbar = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const scroll = useLenisScroll();
+    const lenis = scroll?.lenis ?? null;
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const lockedScrollYRef = useRef(0);
+    const skipRestoreScrollRef = useRef(false);
 
-    const handleLinkClick = (link: string) => {
-        navigate(link);
+    const handleNavItem = (item: NavItem) => {
+        skipRestoreScrollRef.current = true;
+        if (item.hash) {
+            if (location.pathname === "/") {
+                scroll?.scrollToHash(`#${item.hash}`);
+            } else {
+                navigate({ pathname: "/", hash: item.hash });
+            }
+        } else {
+            navigate(item.link);
+        }
         setIsMenuOpen(false);
     };
 
-useEffect(() => {
-    const onResize = () => {
-        if (window.innerWidth >= size.md) {
-            setIsMenuOpen(false);
+    const handleBrandClick = () => {
+        skipRestoreScrollRef.current = true;
+        if (location.pathname === "/") {
+            scroll?.scrollToHash("#intro");
+        } else {
+            navigate("/");
         }
+        setIsMenuOpen(false);
     };
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-}, []);
+
+    useEffect(() => {
+        const onResize = () => {
+            if (window.innerWidth >= size.md) {
+                setIsMenuOpen(false);
+            }
+        };
+        window.addEventListener('resize', onResize);
+        return () => window.removeEventListener('resize', onResize);
+    }, []);
+
+    useEffect(() => {
+        if (!isMenuOpen) return;
+        if (lenis) lenis.stop();
+
+        const scrollY = lenis ? lenis.scroll : window.scrollY;
+        lockedScrollYRef.current = scrollY;
+
+        const html = document.documentElement;
+        const body = document.body;
+        const prev = {
+            htmlOverflow: html.style.overflow,
+            bodyOverflow: body.style.overflow,
+            bodyPosition: body.style.position,
+            bodyTop: body.style.top,
+            bodyLeft: body.style.left,
+            bodyRight: body.style.right,
+            bodyWidth: body.style.width,
+        };
+
+        html.style.overflow = 'hidden';
+        body.style.overflow = 'hidden';
+        body.style.position = 'fixed';
+        body.style.top = `-${scrollY}px`;
+        body.style.left = '0';
+        body.style.right = '0';
+        body.style.width = '100%';
+
+        const blockTouchMove = (e: TouchEvent) => {
+            e.preventDefault();
+        };
+        document.addEventListener('touchmove', blockTouchMove, { passive: false });
+
+        return () => {
+            document.removeEventListener('touchmove', blockTouchMove);
+            html.style.overflow = prev.htmlOverflow;
+            body.style.overflow = prev.bodyOverflow;
+            body.style.position = prev.bodyPosition;
+            body.style.top = prev.bodyTop;
+            body.style.left = prev.bodyLeft;
+            body.style.right = prev.bodyRight;
+            body.style.width = prev.bodyWidth;
+
+            const y = lockedScrollYRef.current;
+            const skipRestore = skipRestoreScrollRef.current;
+            skipRestoreScrollRef.current = false;
+            if (lenis) lenis.start();
+            if (skipRestore) return;
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    if (lenis) {
+                        lenis.scrollTo(y, { immediate: true });
+                    } else {
+                        window.scrollTo(0, y);
+                    }
+                });
+            });
+        };
+    }, [isMenuOpen, lenis]);
 
 
     return (
@@ -236,7 +315,7 @@ useEffect(() => {
                             transition: { duration: 0.3, ease: 'easeOut' }
                         }}
                         transition={{ duration: 0.3, ease: 'easeIn' }}
-                        onClick={() => handleLinkClick('/')}
+                        onClick={handleBrandClick}
                     >
                         hogoshi.dev
                     </Title>
@@ -244,7 +323,7 @@ useEffect(() => {
                     <LinksContainer>
                         {links.map((l) => (
                             <Link
-                                key={l.link}
+                                key={`${l.link}-${l.hash ?? "root"}`}
                                 initial={false}
                                 animate={{
                                     textShadow: '0 0 0px var(--primary)'
@@ -255,7 +334,7 @@ useEffect(() => {
                                     transition: { duration: 0.3, ease: 'easeOut' }
                                 }}
                                 transition={{ duration: 0.3, ease: 'easeIn' }}
-                                onClick={() => navigate(l.link)}
+                                onClick={() => handleNavItem(l)}
                             >
                                 {l.title}
                             </Link>
@@ -328,7 +407,7 @@ useEffect(() => {
                                         scale: 1.05,
                                         background: 'rgba(255, 255, 255, 0.1)'
                                     }}
-                                    onClick={() => handleLinkClick(l.link)}
+                                    onClick={() => handleNavItem(l)}
                                 >
                                     {l.title}
                                 </MobileLink>

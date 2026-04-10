@@ -6,9 +6,24 @@ a, h1, h2, h3, h4, h5, h6, body, html, span, p {
   color: var(--text);
 }
 
-html, body {
+html {
+    overflow-x: hidden;
     background-color: var(--background);
-    overflow: hidden;
+}
+
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+body {
+    background-color: var(--background);
+    overflow-x: hidden;
+    min-height: 100%;
 }
 
 * {
