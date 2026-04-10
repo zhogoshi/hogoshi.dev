@@ -340,7 +340,7 @@ const TypingText = () => {
 const descriptionText =
     "19 y.o. Java & Kotlin & TypeScript developer. Passionate about clean code and smart solutions. Creating efficient backends & engaging interfaces. Turning ordinary problems into extraordinary results."
 
-const stackItems = ["TypeScript", "React", "Java", "Kotlin", "Spring", "Node", "Vite", "PostgreSQL", "Docker", "Git", "CI/CD", "Python", "Redis", "Docker", "Git", "CI/CD", "MongoDB", "Kafka"]
+const stackItems = ["TypeScript", "React", "Java", "Kotlin", "Spring", "Node", "Vite", "PostgreSQL", "Docker", "Git", "CI/CD", "Python", "Redis", "MongoDB", "Kafka", "RabbitMQ", "NATS"]
 
 function IntroBlock() {
     return (
@@ -457,7 +457,7 @@ export const Home = () => {
 
     if (reducedMotion) {
         return (
-            <LenisScrollProvider lenis={null}>
+            <LenisScrollProvider lenis={lenis}>
                 <HomeHashSync />
                 <Navbar />
                 <div style={{ position: "relative", zIndex: 1 }}>

@@ -1,9 +1,19 @@
 import { createContext, useCallback, useContext, useMemo, type ReactNode } from 'react';
 import type Lenis from 'lenis';
 
-const getTargetScrollYForSectionCenter = (el: HTMLElement): number => {
+export const readDocumentScrollY = (lenis: Lenis | null): number => {
+    if (lenis != null) return lenis.scroll;
+    const { position, top } = document.body.style;
+    if (position === 'fixed' && top) {
+        const n = parseFloat(top);
+        if (!Number.isNaN(n)) return Math.max(0, -n);
+    }
+    return window.scrollY || document.documentElement.scrollTop || 0;
+};
+
+const getTargetScrollYForSectionCenter = (el: HTMLElement, scrollBaseY: number): number => {
     const rect = el.getBoundingClientRect();
-    const pageY = rect.top + window.scrollY;
+    const pageY = rect.top + scrollBaseY;
     const centerY = pageY + rect.height / 2;
     let target = centerY - window.innerHeight / 2;
     const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
@@ -38,7 +48,7 @@ export const LenisScrollProvider = ({ lenis, children }: LenisScrollProviderProp
         const run = () => {
             const el = resolveHashTarget(hash);
             if (!el) return;
-            const targetY = getTargetScrollYForSectionCenter(el);
+            const targetY = getTargetScrollYForSectionCenter(el, readDocumentScrollY(lenis));
             if (lenis) {
                 lenis.scrollTo(targetY, {
                     lerp: 0.12,

@@ -24,6 +24,7 @@ export const useLenisGsapHome = (active: boolean, rootRef: RootRef, scrub: numbe
 
         const instance = new Lenis({
             lerp: 0.09,
+            
             smoothWheel: true,
             syncTouch: true,
             autoRaf: false,
@@ -64,7 +65,8 @@ export const useLenisGsapHome = (active: boolean, rootRef: RootRef, scrub: numbe
         if (slices.length === 0) return;
 
         const snap = new Snap(lenis, {
-            type: 'mandatory',
+            type: 'proximity',
+            distanceThreshold: '30%',
             debounce: 140,
             lerp: 0.055,
             duration: 1.25,

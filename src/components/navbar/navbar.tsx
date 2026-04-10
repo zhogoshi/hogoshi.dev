@@ -3,7 +3,7 @@ import styled from "@emotion/styled"
 import { device, size } from "@utility"
 import { motion, AnimatePresence } from "framer-motion"
 import { useNavigate, useLocation } from "react-router-dom"
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 
 type NavItem = {
     title: string
@@ -153,8 +153,7 @@ const MobileMenuOverlay = styled(motion.div)`
     bottom: 0;
     background: rgba(255, 255, 255, 0.3);
     z-index: 999;
-    touch-action: none;
-    overscroll-behavior: none;
+    pointer-events: none;
 
     @media (prefers-color-scheme: dark) {
         background: rgba(0, 0, 0, 0.3);
@@ -177,8 +176,7 @@ const MobileMenuContainer = styled(motion.div)`
     display: flex;
     flex-direction: column;
     gap: 16px;
-    touch-action: manipulation;
-    overscroll-behavior: none;
+    pointer-events: auto;
 `
 
 
@@ -201,13 +199,9 @@ export const Navbar = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const scroll = useLenisScroll();
-    const lenis = scroll?.lenis ?? null;
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const lockedScrollYRef = useRef(0);
-    const skipRestoreScrollRef = useRef(false);
 
     const handleNavItem = (item: NavItem) => {
-        skipRestoreScrollRef.current = true;
         if (item.hash) {
             if (location.pathname === "/") {
                 scroll?.scrollToHash(`#${item.hash}`);
@@ -221,7 +215,6 @@ export const Navbar = () => {
     };
 
     const handleBrandClick = () => {
-        skipRestoreScrollRef.current = true;
         if (location.pathname === "/") {
             scroll?.scrollToHash("#intro");
         } else {
@@ -239,66 +232,6 @@ export const Navbar = () => {
         window.addEventListener('resize', onResize);
         return () => window.removeEventListener('resize', onResize);
     }, []);
-
-    useEffect(() => {
-        if (!isMenuOpen) return;
-        if (lenis) lenis.stop();
-
-        const scrollY = lenis ? lenis.scroll : window.scrollY;
-        lockedScrollYRef.current = scrollY;
-
-        const html = document.documentElement;
-        const body = document.body;
-        const prev = {
-            htmlOverflow: html.style.overflow,
-            bodyOverflow: body.style.overflow,
-            bodyPosition: body.style.position,
-            bodyTop: body.style.top,
-            bodyLeft: body.style.left,
-            bodyRight: body.style.right,
-            bodyWidth: body.style.width,
-        };
-
-        html.style.overflow = 'hidden';
-        body.style.overflow = 'hidden';
-        body.style.position = 'fixed';
-        body.style.top = `-${scrollY}px`;
-        body.style.left = '0';
-        body.style.right = '0';
-        body.style.width = '100%';
-
-        const blockTouchMove = (e: TouchEvent) => {
-            e.preventDefault();
-        };
-        document.addEventListener('touchmove', blockTouchMove, { passive: false });
-
-        return () => {
-            document.removeEventListener('touchmove', blockTouchMove);
-            html.style.overflow = prev.htmlOverflow;
-            body.style.overflow = prev.bodyOverflow;
-            body.style.position = prev.bodyPosition;
-            body.style.top = prev.bodyTop;
-            body.style.left = prev.bodyLeft;
-            body.style.right = prev.bodyRight;
-            body.style.width = prev.bodyWidth;
-
-            const y = lockedScrollYRef.current;
-            const skipRestore = skipRestoreScrollRef.current;
-            skipRestoreScrollRef.current = false;
-            if (lenis) lenis.start();
-            if (skipRestore) return;
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    if (lenis) {
-                        lenis.scrollTo(y, { immediate: true });
-                    } else {
-                        window.scrollTo(0, y);
-                    }
-                });
-            });
-        };
-    }, [isMenuOpen, lenis]);
-
 
     return (
         <>
@@ -341,7 +274,7 @@ export const Navbar = () => {
                         ))}
                     </LinksContainer>
 
-                    <BurgerButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                    <BurgerButton type="button" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                         <BurgerLine
                             animate={isMenuOpen ? {
                                 rotate: 45,
@@ -382,7 +315,7 @@ export const Navbar = () => {
                             animate={{ opacity: 1, backdropFilter: 'blur(8px)' }}
                             exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
                             transition={{ duration: 0.3 }}
-                            onClick={() => setIsMenuOpen(false)}
+                            aria-hidden
                         />
                         <MobileMenuContainer
                             initial={{ opacity: 0, y: -20, x: '-50%', filter: 'blur(10px)' }}
